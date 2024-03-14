@@ -18,7 +18,8 @@ body {
     height: 600px;
     width: 500px;
     border: 1px solid black;
-    padding: 2px;
+    padding: 10px;
+    gap: 10px;
 }
 
 .display {
@@ -29,16 +30,29 @@ body {
     font-size: 50px;
 }
 
+.delete-buttons {
+    display: flex;
+    height: 15%;
+    gap: 10px;
+}
+
+.delete-buttons>button {
+    flex: 1 1 calc(50% - 10px);
+}
+
 .button-pad {
     display: flex;
     flex-wrap: wrap;
     flex: 2 1 auto;
-    gap: 2px;
+    gap: 10px;
 
 }
 
 .button-pad>button {
-    flex: 1 0 calc(100% / 4 - 2px);
+    flex: 1 0 calc(100% / 4 - 10px);
+}
+
+button {
     font-size: 24px;
     padding: 0;
 }
