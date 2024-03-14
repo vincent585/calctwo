@@ -3,9 +3,12 @@ const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const clearAllBtn = document.querySelector(".clear-all");
 const deleteBtn = document.querySelector(".delete");
+const decimalBtn = document.querySelector(".decimal");
 
 clearAllBtn.addEventListener("click", clearDisplay);
 numbers.forEach((num) => num.addEventListener("click", appendToDisplay));
+
+decimalBtn.addEventListener("click", appendDecimal);
 
 function appendToDisplay(event) {
   const num = event.target.value;
@@ -14,6 +17,16 @@ function appendToDisplay(event) {
   } else {
     display.textContent += num;
   }
+}
+
+function appendDecimal() {
+  if (validDecimalPlacement()) {
+    display.textContent += ".";
+  }
+}
+
+function validDecimalPlacement() {
+  return !display.textContent.includes(".");
 }
 
 function clearDisplay() {
