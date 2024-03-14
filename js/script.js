@@ -7,8 +7,16 @@ const decimalBtn = document.querySelector(".decimal");
 
 clearAllBtn.addEventListener("click", clearDisplay);
 numbers.forEach((num) => num.addEventListener("click", appendToDisplay));
-
 decimalBtn.addEventListener("click", appendDecimal);
+deleteBtn.addEventListener("click", deleteLastNumber);
+
+function deleteLastNumber() {
+  if (display.textContent.length === 1) {
+    clearDisplay();
+  } else {
+    display.textContent = display.textContent.slice(0, -1);
+  }
+}
 
 function appendToDisplay(event) {
   const num = event.target.value;
