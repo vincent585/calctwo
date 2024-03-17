@@ -12,17 +12,20 @@ numbers.forEach((num) => num.addEventListener("click", updateOperand));
 
 operators.forEach((operator) => operator.addEventListener("click", updateOperator));
 decimalBtn.addEventListener("click", appendDecimal);
-deleteBtn.addEventListener("click", deleteLastNumber);
+deleteBtn.addEventListener("click", deleteLastAction);
 
 const calculator = {
   firstOperand: null,
   operator: null,
   secondOperand: null,
+  lastAction: null,
 }
 
 function appendToDisplay(event) {
   const num = event.target.value;
-  if (calculator.operator && !calculator.secondOperand) {
+  if (hasDecimal()) {
+    display.textContent += num;
+  } else if (calculator.operator && !calculator.secondOperand) {
     display.textContent = num;
   } else if (display.textContent === "0") {
     display.textContent = num;
@@ -34,8 +37,10 @@ function appendToDisplay(event) {
 function updateOperand() {
   if (calculator.operator) {
     calculator.secondOperand = display.textContent;
+    calculator.lastAction = calculator.secondOperand;
   } else {
     calculator.firstOperand = display.textContent;
+    calculator.lastAction = calculator.firstOperand;
   }
 }
 
@@ -50,6 +55,26 @@ function updateOperator(event) {
     evaluate(operator);
   } else if (calculator.firstOperand) {
     calculator.operator = operator;
+    calculator.lastAction = operator;
+  }
+}
+
+function deleteLastAction() {
+  switch (calculator.lastAction) {
+    case calculator.firstOperand:
+      deleteLastNumber();
+      updateOperand();
+      break;
+    case calculator.secondOperand:
+      deleteLastNumber();
+      updateOperand();
+      break;
+    case calculator.operator:
+      calculator.operator = null;
+      calculator.lastAction = calculator.firstOperand;
+      break;
+    default:
+      return;
   }
 }
 
@@ -66,6 +91,7 @@ function evaluate(newOperator = null) {
   calculator.operator = newOperator;
   calculator.secondOperand = null;
   display.textContent = calculator.firstOperand;
+  calculator.lastAction = newOperator ? newOperator : calculator.firstOperand;
 }
 
 function deleteLastNumber() {
@@ -77,13 +103,19 @@ function deleteLastNumber() {
 }
 
 function appendDecimal() {
-  if (validDecimalPlacement()) {
+  if (calculator.firstOperand && calculator.operator) {
+    display.textContent = "0.";
+  } else if (validDecimalPlacement()) {
     display.textContent += ".";
   }
 }
 
 function validDecimalPlacement() {
-  return !display.textContent.includes(".");
+  return !hasDecimal();
+}
+
+function hasDecimal() {
+  return display.textContent.includes(".");
 }
 
 function clearDisplay() {
