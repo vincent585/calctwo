@@ -42,13 +42,18 @@ body {
 
 .button-pad {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     flex: 2 1 auto;
     gap: 10px;
-
 }
 
-.button-pad>button {
+.button-row {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 10px;
+}
+
+.button-row>button {
     flex: 1 0 calc(100% / 4 - 10px);
 }
 
