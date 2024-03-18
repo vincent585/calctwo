@@ -106,11 +106,12 @@ function deleteLastNumber() {
 function appendDecimal() {
   if (calculator.firstOperand && calculator.operator && !calculator.secondOperand) {
     display.textContent = "0.";
+    calculator.secondOperand = display.textContent;
+    calculator.lastAction = calculator.secondOperand;
   } else if (validDecimalPlacement()) {
     display.textContent += ".";
+    calculator.lastAction === calculator.firstOperand ? calculator.firstOperand += "." : calculator.secondOperand += ".";
   }
-
-  calculator.lastAction === calculator.firstOperand ? calculator.firstOperand += "." : calculator.secondOperand += ".";
 }
 
 function validDecimalPlacement() {
@@ -133,6 +134,7 @@ function clearCalculator() {
   calculator.firstOperand = null;
   calculator.operator = null;
   calculator.secondOperand = null;
+  calculator.lastAction = null;
 }
 
 function add(a, b) {
