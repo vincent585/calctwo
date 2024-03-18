@@ -88,10 +88,10 @@ function evaluate(newOperator = null) {
     return;
   }
 
-  calculator.firstOperand = result;
+  display.textContent = result;
+  calculator.firstOperand = display.textContent;
   calculator.operator = newOperator;
   calculator.secondOperand = null;
-  display.textContent = calculator.firstOperand;
   calculator.lastAction = newOperator ? newOperator : calculator.firstOperand;
 }
 
@@ -158,17 +158,28 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
+  let result;
   switch (operator) {
     case "+":
-      return add(a, b);
+      result = add(a, b);
+      break;
     case "-":
-      return subtract(a, b);
+      result = subtract(a, b);
+      break;
     case "*":
-      return multiply(a, b);
+      result = multiply(a, b);
+      break;
     case "/":
-      return divide(a, b);
+      result = divide(a, b);
+      break;
     default:
       console.log("Unknown operator");
       break;
   }
+
+  if (!Number.isInteger(result)) {
+    return result.toFixed(6);
+  }
+
+  return result;
 }
