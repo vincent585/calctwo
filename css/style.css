@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: monospace;
 }
 
 body {
@@ -15,20 +16,26 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    height: 600px;
+    height: 700px;
     width: 500px;
-    border: 1px solid black;
-    padding: 10px;
+    border: 4px solid #272932;
+    padding: 30px;
     gap: 10px;
+    background-color: #4D7EA8;
+    border-radius: 16px;
 }
 
 .display {
     flex: 1 1 0;
     display: flex;
     justify-content: flex-end;
-    align-items: flex-end;
-    font-size: 50px;
+    align-items: center;
+    font-size: 5em;
     overflow: hidden;
+    color: #B6C2D9;
+    background-color: #272932;
+    padding-right: 10px;
+    border-radius: 8px;
 }
 
 .delete-buttons {
@@ -39,6 +46,11 @@ body {
 
 .delete-buttons>button {
     flex: 1 1 calc(50% - 10px);
+    background-color: #9E90A2;
+}
+
+.delete-buttons>button:active {
+    background-color: #7b6d80;
 }
 
 .button-pad {
@@ -56,9 +68,16 @@ body {
 
 .button-row>button {
     flex: 1 0 calc(100% / 4 - 10px);
+    background-color: #B6C2D9;
 }
 
 button {
     font-size: 24px;
     padding: 0;
+    border: 2px solid #272932;
+    border-radius: 8px;
+}
+
+.button-row>button:active {
+    background-color: #939fb6;
 }
