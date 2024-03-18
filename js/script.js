@@ -23,7 +23,10 @@ const calculator = {
 
 function appendToDisplay(event) {
   const num = event.target.value;
-  if (hasDecimal()) {
+
+  if (hasTrailingDecimal() && calculator.lastAction === calculator.operator) {
+    display.textContent = num;
+  } else if (hasDecimal()) {
     display.textContent += num;
   } else if (calculator.operator && !calculator.secondOperand) {
     display.textContent = num;
@@ -116,6 +119,10 @@ function validDecimalPlacement() {
 
 function hasDecimal() {
   return display.textContent.includes(".");
+}
+
+function hasTrailingDecimal() {
+  return display.textContent.charAt(display.textContent.length - 1) === ".";
 }
 
 function clearDisplay() {
