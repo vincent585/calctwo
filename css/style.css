@@ -44,6 +44,10 @@ body {
     gap: 10px;
 }
 
+.delete {
+    font-size: 4em;
+}
+
 .delete-buttons>button {
     flex: 1 1 calc(50% - 10px);
     background-color: #9E90A2;
