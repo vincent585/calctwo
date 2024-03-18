@@ -24,10 +24,8 @@ const calculator = {
 function appendToDisplay(event) {
   const num = event.target.value;
 
-  if (hasTrailingDecimal() && calculator.lastAction === calculator.operator) {
+  if (hasTrailingDecimal() && calculator.lastAction === calculator.operator && !calculator.secondOperand) {
     display.textContent = num;
-  } else if (hasDecimal()) {
-    display.textContent += num;
   } else if (calculator.operator && !calculator.secondOperand) {
     display.textContent = num;
   } else if (display.textContent === "0") {
@@ -106,11 +104,13 @@ function deleteLastNumber() {
 }
 
 function appendDecimal() {
-  if (calculator.firstOperand && calculator.operator) {
+  if (calculator.firstOperand && calculator.operator && !calculator.secondOperand) {
     display.textContent = "0.";
   } else if (validDecimalPlacement()) {
     display.textContent += ".";
   }
+
+  calculator.lastAction === calculator.firstOperand ? calculator.firstOperand += "." : calculator.secondOperand += ".";
 }
 
 function validDecimalPlacement() {
